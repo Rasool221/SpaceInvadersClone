@@ -27,7 +27,7 @@ public class menu_button {
     rect(this.xpos - 4, this.ypos - 4, this.w + 4, this.h + 4);
     fill(0);
     textSize(15);
-    text("play", this.xpos + 30, this.ypos + 30);
+    text(this.label, this.xpos + 30, this.ypos + 30);
   }
 
 }
