@@ -1,18 +1,19 @@
 boolean isinmenu;
 screen current_screen;
-
+Player gamePlayer;
 
 void setup() {
   size(400, 400);
   isinmenu = true;
   current_screen = screen.main_menu;  
+  gamePlayer = new Player(width/2, height - height/6);
 }
+
 
 menu_button play_btn = new menu_button(150, 100, 100, 50, "play");
 
 void draw() {
   background(0);
- 
   switch (current_screen) {
    case main_menu:
      fill(#16F57C);
@@ -28,7 +29,7 @@ void draw() {
      } 
      break;
    case game:
-     // draw game here
+     gamePlayer.show();
      break;
    case directions:
      // to do
