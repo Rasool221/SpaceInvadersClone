@@ -30,6 +30,7 @@ void draw() {
      break;
    case game:
      gamePlayer.show();
+     gamePlayer.move();
      break;
    case directions:
      // to do
@@ -37,8 +38,6 @@ void draw() {
    default:
      break; // just in case
   }
- 
-
 }
 
 void mousePressed() {
