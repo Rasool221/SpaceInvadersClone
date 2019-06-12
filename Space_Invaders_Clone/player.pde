@@ -12,12 +12,10 @@ public class Player {
   void move(boolean[] keys) {// 0 = LEFT, 1 = RIGHT, 2 = SPACE
 
     if(keys[1] && this.xpos<width-20) {
-      print(keys[1]);
       this.xpos += 2;
     }
     
     if(keys[0] && this.xpos>20) {
-      print(keys[0]);
       this.xpos -= 2;
     }
   }
