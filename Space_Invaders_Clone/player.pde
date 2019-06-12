@@ -9,24 +9,15 @@ public class Player {
       this.dir = ' ';
   }
   
-  void move() {// vaid DIRECTIONS 'L' and 'R'
-    if (keyPressed) {
-      if (key == 'a' || keyCode == LEFT) {
-        this.dir = 'L';
-      }
-      else if (key == 'd' || keyCode == RIGHT) {
-        this.dir = 'R';
-      }
-    }
-    else {
-      this.dir = ' ';
-    }
-    
-    if(this.dir=='R' && this.xpos<width-20) {
+  void move(boolean[] keys) {// 0 = LEFT, 1 = RIGHT, 2 = SPACE
+
+    if(keys[1] && this.xpos<width-20) {
+      print(keys[1]);
       this.xpos += 2;
     }
     
-    if(this.dir=='L'&& this.xpos>20) {
+    if(keys[0] && this.xpos>20) {
+      print(keys[0]);
       this.xpos -= 2;
     }
   }

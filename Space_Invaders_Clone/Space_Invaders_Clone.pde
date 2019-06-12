@@ -7,6 +7,7 @@ void setup() {
   isinmenu = true;
   current_screen = screen.main_menu;  
   gamePlayer = new Player(width/2, height - height/6);
+  
 }
 
 
@@ -30,7 +31,7 @@ void draw() {
      break;
    case game:
      gamePlayer.show();
-     gamePlayer.move();
+     gamePlayer.move(keys);
      break;
    case directions:
      // to do
