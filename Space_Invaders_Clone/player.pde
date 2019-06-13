@@ -1,12 +1,10 @@
 public class Player {
   int xpos;
   int ypos;
-  char dir;
   
   public Player(int x, int y) {
       this.xpos = x;
       this.ypos = y;
-      this.dir = ' ';
   }
   
   void move(boolean[] keys) {// 0 = LEFT, 1 = RIGHT, 2 = SPACE
@@ -27,7 +25,6 @@ public class Player {
   
   
   void show() {
-    print(this.dir);
     fill(255);
     rectMode(CENTER);
     noStroke();

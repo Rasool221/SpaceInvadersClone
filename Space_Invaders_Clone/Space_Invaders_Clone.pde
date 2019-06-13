@@ -1,13 +1,15 @@
 boolean isinmenu;
 screen current_screen;
 Player gamePlayer;
+Enemy Enemytest;
 
 void setup() {
+  //noSmooth();
   size(400, 400);
   isinmenu = true;
   current_screen = screen.main_menu;  
   gamePlayer = new Player(width/2, height - height/6);
-  
+  Enemytest = new Enemy(width/2, height/6, enemy2);
 }
 
 
@@ -32,6 +34,7 @@ void draw() {
    case game:
      gamePlayer.show();
      gamePlayer.move(keys);
+     Enemytest.show();
      break;
    case directions:
      // to do
