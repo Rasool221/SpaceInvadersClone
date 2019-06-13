@@ -18,6 +18,11 @@ public class Player {
     if(keys[0] && this.xpos>20) {
       this.xpos -= 2;
     }
+    
+    if(keys[2]) {
+      //do something
+      print("pew");
+    }
   }
   
   
