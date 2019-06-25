@@ -1,18 +1,22 @@
 boolean isinmenu;
 screen current_screen;
-
+Player gamePlayer;
+Enemy Enemytest;
 
 void setup() {
+  //noSmooth();
   size(400, 400);
   isinmenu = true;
   current_screen = screen.main_menu;  
+  gamePlayer = new Player(width/2, height - height/6);
+  Enemytest = new Enemy(width/2, height/6, enemy2);
 }
+
 
 menu_button play_btn = new menu_button(150, 100, 100, 50, "play");
 
 void draw() {
   background(0);
- 
   switch (current_screen) {
    case main_menu:
      fill(#16F57C);
@@ -28,7 +32,9 @@ void draw() {
      } 
      break;
    case game:
-     // draw game here
+     gamePlayer.show();
+     gamePlayer.move(keys);
+     Enemytest.show();
      break;
    case directions:
      // to do
@@ -36,8 +42,6 @@ void draw() {
    default:
      break; // just in case
   }
- 
-
 }
 
 void mousePressed() {
