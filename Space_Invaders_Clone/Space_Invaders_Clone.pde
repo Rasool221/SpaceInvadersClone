@@ -2,6 +2,7 @@ boolean isinmenu;
 screen current_screen;
 Player gamePlayer;
 Enemy Enemytest;
+boolean called = false;
 
 bullet[] bullets_arr = {};
 
@@ -45,7 +46,11 @@ void draw() {
      gamePlayer.move(keys);
      
      if (keys[2]) {
-       bullets_arr = (bullet[]) append(bullets_arr, new bullet(gamePlayer.xpos, gamePlayer.ypos, 2, 5, 5));  
+     
+       if (!called) {
+         bullets_arr = (bullet[]) append(bullets_arr, new bullet(gamePlayer.xpos, gamePlayer.ypos, 2, 5, 5));
+         called = true;
+       }
      }
      
      if (bullets_arr.length != 0) {
