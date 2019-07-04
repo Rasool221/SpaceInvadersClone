@@ -18,6 +18,7 @@ void keyPressed() {
   }
   if (key == ' ') {
     keys[2] = true;
+    called = false;
   }
 }
  
@@ -30,5 +31,6 @@ void keyReleased() {
   }
   if (key == ' ') {
     keys[2] = false;
+    called = true;
   }
 }

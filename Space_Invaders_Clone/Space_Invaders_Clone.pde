@@ -1,6 +1,7 @@
 boolean isinmenu;
 screen current_screen;
 Player gamePlayer;
+
 int numberOfEnemiesPerRow = 10;
 int rows = 5;
 Enemy[][] Enemys = new Enemy[5][numberOfEnemiesPerRow];
@@ -8,6 +9,12 @@ int TimePerEnemyMovement = 200;
 boolean moveEnemys = false;
 int savedTime;
 int yEnemySpeed = 10;
+
+Enemy Enemytest;
+boolean called = false;
+
+bullet[] bullets_arr = {};
+
 
 void setup() {
   //noSmooth();
@@ -22,9 +29,12 @@ void setup() {
 }
 
 menu_button play_btn = new menu_button(150, 100, 100, 50, "play");
+menu_button dir_btn = new menu_button(150, 160, 100, 50, "directions");
+menu_button back_btn = new menu_button(10, 10, 50, 50, "back");
 
 void draw() {
   background(0);
+  
   switch (current_screen) {
    case main_menu:
      fill(#16F57C);
@@ -34,9 +44,14 @@ void draw() {
      fill(#FFFFFF);
      strokeWeight(4);
      play_btn.show();
+     dir_btn.show(); 
       
      if (is_mouse_over(play_btn)) {
       play_btn.draw_outline(); 
+     } 
+     
+     if (is_mouse_over(dir_btn)) {
+      dir_btn.draw_outline(); 
      } 
      break;
    case game:
@@ -46,15 +61,45 @@ void draw() {
      gamePlayer.show();
      gamePlayer.move(keys);
      
-     //Enemytest.show();
+
+ //Enemytest.show();
      
      EnemyMove(millis()-savedTime);
      drawEnemies();
      
+
+     if (keys[2]) {
      
+       if (!called) {
+         bullets_arr = (bullet[]) append(bullets_arr, new bullet(gamePlayer.xpos, gamePlayer.ypos, 2, 5, 5));
+         called = true;
+       }
+     }
+     
+     if (bullets_arr.length != 0) {
+       for (int i = 0; i < bullets_arr.length; i++) {
+         bullets_arr[i].show();
+         bullets_arr[i].show_hitbox();
+         bullets_arr[i].update();
+       }
+     }
+   
+     Enemytest.show();
+     back_btn.show();
+
+
+     if (is_mouse_over(back_btn)) {
+      back_btn.draw_outline(); 
+     } 
+
      break;
    case directions:
-     // to do
+     
+     back_btn.show();
+     
+     if (is_mouse_over(back_btn)) {
+        back_btn.draw_outline(); 
+     }
      break;
    default:
      break; // just in case
@@ -64,7 +109,11 @@ void draw() {
 void mousePressed() {
    if (is_mouse_over(play_btn)) {
     current_screen = screen.game;
-   }
+   } else if (is_mouse_over(back_btn)) {
+     current_screen = screen.main_menu;  
+   } else if (is_mouse_over(dir_btn)) {
+     current_screen = screen.directions;
+   } 
 }
 
 void createEnemies(int w, int h) {
