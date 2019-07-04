@@ -17,13 +17,8 @@ public class Player {
       this.xpos -= 2;
     }
     
-    if(keys[2]) {
-      //do something
-      print("pew");
-    }
   }
-  
-  
+ 
   void show() {
     fill(255);
     rectMode(CENTER);

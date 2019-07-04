@@ -14,20 +14,22 @@ public class menu_button {
   }
  
   void show() {
+     fill(#FFFFFF);
      rect(this.xpos, this.ypos, this.w, this.h);
      fill(0);
      textSize(13);
-     text(this.label, this.xpos + 36, this.ypos + 30);
+     text(this.label, this.xpos + 5, this.ypos + (this.h/2), this.w, this.h);
   }
 
    void draw_outline() {
     noFill();
     strokeWeight(3);
-    fill(#FFFFFF);
+    fill(#16F57C);
     rect(this.xpos - 4, this.ypos - 4, this.w + 4, this.h + 4);
     fill(0);
-    textSize(15);
-    text(this.label, this.xpos + 30, this.ypos + 30);
+    
+    textSize(14);
+    text(this.label, this.xpos + 5, this.ypos + (this.h/2), this.w, this.h);
   }
 
 }
