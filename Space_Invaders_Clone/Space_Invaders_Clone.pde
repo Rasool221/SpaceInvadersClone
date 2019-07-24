@@ -10,11 +10,8 @@ boolean moveEnemys = false;
 int savedTime;
 int yEnemySpeed = 10;
 
-Enemy Enemytest;
 boolean called = false;
-
 bullet[] bullets_arr = {};
-
 
 void setup() {
   //noSmooth();
@@ -23,7 +20,6 @@ void setup() {
   current_screen = screen.main_menu;  
   gamePlayer = new Player(width/2, height - height/6);
   //Enemytest = new Enemy(width/2, height/6, enemy3);
-  createEnemies(width,height);
   
   int savedTime = millis();
 }
@@ -57,12 +53,9 @@ void draw() {
    case game:
    
      strokeWeight(1);
-     
      gamePlayer.show();
      gamePlayer.move(keys);
      
-
- //Enemytest.show();
      
      EnemyMove(millis()-savedTime);
      drawEnemies();
@@ -84,7 +77,6 @@ void draw() {
        }
      }
    
-     Enemytest.show();
      back_btn.show();
 
 
@@ -109,6 +101,7 @@ void draw() {
 void mousePressed() {
    if (is_mouse_over(play_btn)) {
     current_screen = screen.game;
+    resetGame();
    } else if (is_mouse_over(back_btn)) {
      current_screen = screen.main_menu;  
    } else if (is_mouse_over(dir_btn)) {
@@ -174,4 +167,10 @@ void EnemyMove(int time) {
   else {
     moveEnemys = false;
   }
+}
+
+void resetGame() {
+  Enemys = new Enemy[5][numberOfEnemiesPerRow];
+  createEnemies(width,height);
+  
 }
