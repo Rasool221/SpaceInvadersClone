@@ -9,6 +9,8 @@ class bullet {
  int w;
  int h;
  
+ boolean visible = false; 
+ 
  public bullet(int x, int y, int speed, int w, int h) {
   this.xpos = x;
   this.ypos = y;
@@ -17,11 +19,14 @@ class bullet {
   this.h = h;
   this.hitbox_width = w;
   this.hitbox_height = h;
+  //this.visible = false; 
  }
  
  void show() {
-  fill(#FFFFFF);
-  rect(this.xpos, this.ypos, this.w, this.h);
+  if(this.visible) {
+    fill(#FFFFFF);
+    rect(this.xpos, this.ypos, this.w, this.h);
+  }
  }
  
  /*

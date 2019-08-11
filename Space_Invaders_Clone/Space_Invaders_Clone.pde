@@ -6,15 +6,15 @@ int numberOfEnemiesPerRow = 10;
 int rows = 5;
 Enemy[][] Enemys = new Enemy[5][numberOfEnemiesPerRow];
 int TimePerEnemyMovement = 200;
+int TimePerBullet = 250;
 boolean moveEnemys = false;
 int savedTime;
+int savedBulletTime;
 int yEnemySpeed = 10;
 
-Enemy Enemytest;
 boolean called = false;
 
-bullet[] bullets_arr = {};
-
+bullet[] Bullets;
 
 void setup() {
   //noSmooth();
@@ -23,9 +23,9 @@ void setup() {
   current_screen = screen.main_menu;  
   gamePlayer = new Player(width/2, height - height/6);
   //Enemytest = new Enemy(width/2, height/6, enemy3);
-  createEnemies(width,height);
   
   int savedTime = millis();
+  int savedBulletTime = millis();
 }
 
 menu_button play_btn = new menu_button(150, 100, 100, 50, "play");
@@ -57,34 +57,25 @@ void draw() {
    case game:
    
      strokeWeight(1);
-     
      gamePlayer.show();
      gamePlayer.move(keys);
      
-
- //Enemytest.show();
      
      EnemyMove(millis()-savedTime);
      drawEnemies();
-     
+     resetBullets();
 
      if (keys[2]) {
-     
-       if (!called) {
-         bullets_arr = (bullet[]) append(bullets_arr, new bullet(gamePlayer.xpos, gamePlayer.ypos, 2, 5, 5));
-         called = true;
-       }
+       bulletPressed();
      }
      
-     if (bullets_arr.length != 0) {
-       for (int i = 0; i < bullets_arr.length; i++) {
-         bullets_arr[i].show();
-         bullets_arr[i].show_hitbox();
-         bullets_arr[i].update();
-       }
+     for (int i = 0; i < Bullets.length; i++) {
+       Bullets[i].show();
+       Bullets[i].show_hitbox();
+       Bullets[i].update();
      }
-   
-     Enemytest.show();
+     
+     
      back_btn.show();
 
 
@@ -109,6 +100,7 @@ void draw() {
 void mousePressed() {
    if (is_mouse_over(play_btn)) {
     current_screen = screen.game;
+    resetGame();
    } else if (is_mouse_over(back_btn)) {
      current_screen = screen.main_menu;  
    } else if (is_mouse_over(dir_btn)) {
@@ -135,6 +127,7 @@ void createEnemies(int w, int h) {
 void drawEnemies() {
   int x = (width - width/5)/numberOfEnemiesPerRow;
   int y = (height-height/6)/(rows*2);
+  
   
   for(int i = 0; i < Enemys.length;i++) {
     for(int k = 0; k < Enemys[i].length ;k++) {
@@ -173,5 +166,45 @@ void EnemyMove(int time) {
   }
   else {
     moveEnemys = false;
+  }
+}
+
+void resetGame() {
+  Enemys = new Enemy[5][numberOfEnemiesPerRow];
+  createEnemies(width,height);
+  Bullets = new bullet[3];
+  for(int i = 0; i < Bullets.length;i++) {
+      Bullets[i] = new bullet(gamePlayer.xpos, gamePlayer.ypos, 2, 5, 5);
+    }
+}
+
+void bulletPressed() {
+  if(canShoot(millis() - savedBulletTime)) {
+    for(int i = 0; i < Bullets.length;i++) {
+      if(!Bullets[i].visible) {
+        Bullets[i].visible = true;
+        Bullets[i].xpos = gamePlayer.xpos;
+        Bullets[i].ypos = gamePlayer.ypos;
+        break;
+      }
+    }
+  }
+}
+
+boolean canShoot(int time) {
+  if(time > TimePerBullet) {
+    savedBulletTime = millis();
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+void resetBullets() {
+  for(int i = 0; i < Bullets.length;i++) {
+    if (Bullets[i].ypos < 0) {
+      Bullets[i].visible = false;
+    }
   }
 }
