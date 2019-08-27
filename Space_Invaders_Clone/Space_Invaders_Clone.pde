@@ -73,6 +73,7 @@ void draw() {
        Bullets[i].show();
        Bullets[i].show_hitbox();
        Bullets[i].update();
+       check_for_bullet_hit();
      }
      
      

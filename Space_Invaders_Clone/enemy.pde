@@ -7,6 +7,7 @@ public class Enemy {
   int size = 2;
   int dir = 1;
   int speed = 2;
+  boolean visible = false; 
   
   public Enemy(int x, int y, boolean[][] shape) {
     this.xpos = x;
@@ -14,16 +15,19 @@ public class Enemy {
     this.shape = shape;
     this.HitboxWidth = this.shape[0].length*2;
     this.HitboxHeight = this.shape.length*2;
+    this.visible = true;
   }
   
   void show() {
-    fill(255);
-    noStroke();
-    rectMode(CORNER);
-    for(int i = 0; i < this.shape.length ;i++) {
-      for(int k = 0; k < this.shape[i].length ;k++) {
-        if(this.shape[i][k]) {
-          rect(this.xpos+(k*size),this.ypos+(i*size),size,size);
+    if(this.visible) {
+      fill(255);
+      noStroke();
+      rectMode(CORNER);
+      for(int i = 0; i < this.shape.length ;i++) {
+        for(int k = 0; k < this.shape[i].length ;k++) {
+          if(this.shape[i][k]) {
+            rect(this.xpos+(k*size),this.ypos+(i*size),size,size);
+          }
         }
       }
     }
